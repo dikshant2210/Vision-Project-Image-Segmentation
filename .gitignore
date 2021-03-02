@@ -3,3 +3,6 @@ VOCdevkit/
 VOCtrainval_11-May-2012.tar
 CIFAR10/
 .vscode/
+.env/
+models/
+models\vgg16/
