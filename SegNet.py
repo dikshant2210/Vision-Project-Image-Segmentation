@@ -67,6 +67,18 @@ def segnet_decoder_block(in_channels, out_channels):
   block = nn.Sequential(*layers)
   return block
 
+def load_pretrained_vg166_bn():
+    """ Loads the pretrained VGG-16 with Batch Normalization model """
+    if os.path.isdir('models/vgg16_bn/hub/checkpoints'):
+        checkpoint = torch.load('models/vgg16_bn/hub/checkpoints/vgg16_bn-6c64b313.pth')
+        vgg16_bn = models.vgg16_bn()
+        vgg16_bn.load_state_dict(checkpoint)
+    else:
+        os.environ['TORCH_HOME'] = 'models/vgg16_bn'
+        vgg16_bn = models.vgg16_bn(pretrained=True, progress=True)
+
+    return vgg16_bn
+
 class Segnet(nn.Module):
   """SegNet Class"""
 
